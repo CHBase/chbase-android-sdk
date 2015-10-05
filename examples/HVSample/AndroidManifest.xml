@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.microsoft.hsg.android.hvsample"
+    package="com.chbase.android.hvsample"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.microsoft.hsg.android.hvsample.MainActivity"
+            android:name="com.chbase.android.hvsample.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.microsoft.hsg.android.simplexml.ShellActivity" >
+        <activity android:name="com.chbase.android.simplexml.ShellActivity" >
         </activity>
         <activity android:name="VocabActivity"></activity>
         <activity android:name="WeightActivity"></activity>
@@ -35,8 +35,8 @@
         <activity android:name="FileUploadActivity"></activity>
         <activity android:name="LocalVaultActivity"></activity>
         <provider
-           android:name="com.microsoft.hsg.android.simplexml.store.HVContentProvider"
-           android:authorities="com.microsoft.hsg.android.store"
+           android:name="com.chbase.android.simplexml.store.HVContentProvider"
+           android:authorities="com.chbase.android.store"
            android:exported="false"
            android:grantUriPermissions="false"
            android:label="HVContentProvider" />
