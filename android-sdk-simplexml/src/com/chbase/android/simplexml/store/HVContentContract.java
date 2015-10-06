@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 
 public final class HVContentContract {
 
-   public static final String AUTHORITY =  "com.microsoft.hsg.android.store"; 
+   public static final String AUTHORITY =  "com.chbase.android.store"; 
    public static final Uri CONTENT_URI =  Uri.parse("content://" + AUTHORITY); 
    
    public static final class Things implements BaseColumns {
