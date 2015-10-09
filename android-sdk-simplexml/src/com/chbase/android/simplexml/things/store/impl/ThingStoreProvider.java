@@ -3,7 +3,7 @@ package com.chbase.android.simplexml.things.store.impl;
 import java.util.List;
 
 import com.chbase.Connection;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.methods.getthings3.request.BlobFormatSpec;
 import com.chbase.android.simplexml.methods.getthings3.request.BlobPayloadRequest;
 import com.chbase.android.simplexml.methods.getthings3.request.GetThings3Request;
@@ -109,7 +109,7 @@ public class ThingStoreProvider implements ThingProvider {
 	
 	private Connection getConnection() {
 		if (connection == null) {
-			connection = HealthVaultApp.getInstance().getConnection();
+			connection = CHBaseApp.getInstance().getConnection();
 		}
 		
 		return connection;

@@ -115,7 +115,7 @@ public class ConnectionFactory
     {
         int connectTimeout = 30 * 1000;
         int readTimeout = 30 * 1000;
-        String urlString =     HealthVaultService.getInstance().getSettings()
+        String urlString =     CHBaseService.getInstance().getSettings()
             .getServiceUrl();
         
         URL url = new URL(urlString);

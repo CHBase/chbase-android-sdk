@@ -38,7 +38,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.chbase.Request;
-import com.chbase.android.HealthVaultService;
+import com.chbase.android.CHBaseService;
 import com.chbase.android.PersonInfo;
 import com.chbase.android.Record;
 import com.chbase.android.ShellActivity;
@@ -47,7 +47,7 @@ import com.chbase.request.RequestMarshaller;
 import com.chbase.request.SimpleRequestTemplate;
 
 public class WeightActivity extends Activity {
-    private HealthVaultService service;
+    private CHBaseService service;
     private Record selectedRecord;
     
     /**
@@ -59,12 +59,12 @@ public class WeightActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weight);
-        service = HealthVaultService.getInstance();
+        service = CHBaseService.getInstance();
 
         Button startAuth = (Button) findViewById(R.id.auth);
         startAuth.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                HealthVaultService service = HealthVaultService.getInstance();
+                CHBaseService service = CHBaseService.getInstance();
                 startActivity(ShellActivity.createAppAuthIntent(
                     WeightActivity.this, service.getAppId()));
             }
@@ -137,7 +137,7 @@ public class WeightActivity extends Activity {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                if (service.getConnectionStatus() == HealthVaultService.ConnectionStatus.Connected) {
+                if (service.getConnectionStatus() == CHBaseService.ConnectionStatus.Connected) {
                     List<PersonInfo> personInfos = service.getPersonInfoList();
                     for (PersonInfo personInfo : personInfos) {
                         for (Record record : personInfo.getRecords()) {
@@ -247,7 +247,7 @@ public class WeightActivity extends Activity {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                if (service.getConnectionStatus() == HealthVaultService.ConnectionStatus.Connected) {
+                if (service.getConnectionStatus() == CHBaseService.ConnectionStatus.Connected) {
                     if (selectedRecord != null) {
                         weights = getWeights();
                     }

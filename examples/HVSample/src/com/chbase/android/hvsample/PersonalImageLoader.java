@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.chbase.HVException;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
 import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
@@ -54,7 +54,7 @@ public class PersonalImageLoader implements ComponentCallbacks2 {
             imageView.setImageBitmap(image);
         }
         else {
-        	List<Record> records = HealthVaultApp.getInstance().getRecordList();
+        	List<Record> records = CHBaseApp.getInstance().getRecordList();
         	Record record = null;
         	
         	for(Record rcd : records) {

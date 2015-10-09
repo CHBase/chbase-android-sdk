@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.chbase.HVException;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
@@ -47,7 +47,7 @@ import android.widget.Toast;
 
 public class WeightActivity extends Activity {
 
-	private HealthVaultApp service;
+	private CHBaseApp service;
     private HealthVaultClient hvClient;
     private Record selectedRecord;
     
@@ -122,7 +122,7 @@ public class WeightActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.weight);
-        service = HealthVaultApp.getInstance();
+        service = CHBaseApp.getInstance();
         hvClient = new HealthVaultClient();
 
         Button startAuth = (Button) findViewById(R.id.auth);

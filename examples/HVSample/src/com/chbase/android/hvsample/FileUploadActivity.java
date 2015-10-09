@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.chbase.HVException;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
 import com.chbase.android.simplexml.things.types.file.File;
@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class FileUploadActivity extends Activity {
 	
-	HealthVaultApp service;
+	CHBaseApp service;
 	HealthVaultClient hvClient;
 	
 	private Camera camera;
@@ -73,7 +73,7 @@ public class FileUploadActivity extends Activity {
 				FileInputStream source;
 				try {
 					source = openFileInput(filename);
-					hvClient.asyncRequest(hvFile.uploadAsync(HealthVaultApp.getInstance().getCurrentRecord(), null, source), 
+					hvClient.asyncRequest(hvFile.uploadAsync(CHBaseApp.getInstance().getCurrentRecord(), null, source), 
 	        				new FileUploadActivityCallback<Void>());
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -94,7 +94,7 @@ public class FileUploadActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fileupload);
 		
-		service = HealthVaultApp.getInstance(this);
+		service = CHBaseApp.getInstance(this);
 		hvClient = new HealthVaultClient();
 		
 		progressContainer = findViewById(R.id.camera_progressContainer);
@@ -196,7 +196,7 @@ public class FileUploadActivity extends Activity {
 						
 						hvClient.start();
 	            		
-	            		hvClient.asyncRequest(hvFile.uploadAsync(HealthVaultApp.getInstance().getCurrentRecord(), null, source), 
+	            		hvClient.asyncRequest(hvFile.uploadAsync(CHBaseApp.getInstance().getCurrentRecord(), null, source), 
 	            				new FileUploadActivityCallback<Void>());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block

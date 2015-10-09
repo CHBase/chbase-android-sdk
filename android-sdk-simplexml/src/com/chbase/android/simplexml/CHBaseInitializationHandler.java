@@ -1,6 +1,6 @@
 package com.chbase.android.simplexml;
 
-public interface HealthVaultInitializationHandler {
+public interface CHBaseInitializationHandler {
 
 	public void onConnected();
 	

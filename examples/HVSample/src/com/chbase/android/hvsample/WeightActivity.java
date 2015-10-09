@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.chbase.HVException;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
 import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 public class WeightActivity extends Activity {
 
-	private HealthVaultApp service;
+	private CHBaseApp service;
     private HealthVaultClient hvClient;
     private Record currentRecord;
     
@@ -32,7 +32,7 @@ public class WeightActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weight);
-        service = HealthVaultApp.getInstance();
+        service = CHBaseApp.getInstance();
         hvClient = new HealthVaultClient();
         
         Button weightsBtn = (Button) findViewById(R.id.addWeight);
@@ -57,7 +57,7 @@ public class WeightActivity extends Activity {
     protected void onResume()
     {
         super.onResume();
-        currentRecord = HealthVaultApp.getInstance().getCurrentRecord();
+        currentRecord = CHBaseApp.getInstance().getCurrentRecord();
         getWeights();
     }
     

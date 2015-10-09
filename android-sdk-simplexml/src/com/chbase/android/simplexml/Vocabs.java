@@ -21,7 +21,7 @@ public class Vocabs {
 	
 	public ArrayList<VocabCodeSet> get(ArrayList<VocabIdentifier> vocabIds) {
 		
-		Connection connection = HealthVaultApp.getInstance().getConnection();
+		Connection connection = CHBaseApp.getInstance().getConnection();
 		
 		RequestTemplate requestTemplate = new RequestTemplate(connection);
 
@@ -44,7 +44,7 @@ public class Vocabs {
 	
 	public VocabQueryResult search(VocabIdentifier vocabKey, String searchText) {
 		
-		Connection connection = HealthVaultApp.getInstance().getConnection();
+		Connection connection = CHBaseApp.getInstance().getConnection();
 		RequestTemplate requestTemplate = new RequestTemplate(connection);
 		
 		VocabSearch vocabSearch = new VocabSearch(searchText);

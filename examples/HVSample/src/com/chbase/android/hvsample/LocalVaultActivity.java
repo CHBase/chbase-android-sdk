@@ -2,7 +2,7 @@ package com.chbase.android.hvsample;
 
 import java.util.List;
 
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.localvault.SynchronizedView;
 import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
@@ -41,7 +41,7 @@ public class LocalVaultActivity extends Activity {
 	}
 
 	public SynchronizedView getSynchronizedView() {
-			Record currentRecord = HealthVaultApp.getInstance().getCurrentRecord();
+			Record currentRecord = CHBaseApp.getInstance().getCurrentRecord();
 			SynchronizedView syncView = SynchronizedView.getView(this, "weights", currentRecord);
 
 			if (syncView == null) {
@@ -87,7 +87,7 @@ public class LocalVaultActivity extends Activity {
 		}
 	
 		if (id == R.id.sync) {
-			Record currentRecord = HealthVaultApp.getInstance().getCurrentRecord();
+			Record currentRecord = CHBaseApp.getInstance().getCurrentRecord();
 			SynchronizedView syncView = getSynchronizedView();
 			if (syncView != null) {
                 hvClient.asyncRequest(syncView.synchronizeAsync(), null);

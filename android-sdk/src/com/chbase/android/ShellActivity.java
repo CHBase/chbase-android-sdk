@@ -20,7 +20,7 @@ import java.net.URLEncoder;
 import com.chbase.Connection;
 import com.chbase.HVInstance;
 import com.chbase.HVInstanceResolver;
-import com.chbase.android.HealthVaultService.ConnectionStatus;
+import com.chbase.android.CHBaseService.ConnectionStatus;
 
 import android.app.Activity;
 import android.content.Context;
@@ -55,7 +55,7 @@ public class ShellActivity extends Activity {
      */
     public static Intent createAppAuthIntent(Activity ctx, String appId) {
         String queryString = 
-            HealthVaultService.getInstance().getSettings().getShellUrl()
+            CHBaseService.getInstance().getSettings().getShellUrl()
              + "/redirect.aspx?target=APPAUTH&targetqs=" 
              + "?appid=" + appId;
          
@@ -83,9 +83,9 @@ public class ShellActivity extends Activity {
              URLEncoder.encode(appToken),
              URLEncoder.encode("Android Phone"),
              appId,
-             HealthVaultService.getInstance().getSettings().getIsMultiInstanceAware());  //TODO: phone name
+             CHBaseService.getInstance().getSettings().getIsMultiInstanceAware());  //TODO: phone name
          queryString = 
-             HealthVaultService.getInstance().getSettings().getShellUrl() 
+             CHBaseService.getInstance().getSettings().getShellUrl() 
              + "/redirect.aspx?target=CREATEAPPLICATION&targetqs=" 
              + URLEncoder.encode(queryString);
              
@@ -182,10 +182,10 @@ public class ShellActivity extends Activity {
         
         private void resolveInstance(String instanceId) {
     		Connection connection = ConnectionFactory.getUnauthenticatedConnection();
-    		connection.setAppId(HealthVaultService.getInstance().getSettings().getMasterAppId());
+    		connection.setAppId(CHBaseService.getInstance().getSettings().getMasterAppId());
     		HVInstance instance = new HVInstanceResolver(connection)
     				.getInstanceForId(instanceId);	
-    		HealthVaultSettings settings = HealthVaultService.getInstance().getSettings();
+    		CHBaseSettings settings = CHBaseService.getInstance().getSettings();
     		settings.setServiceUrl(instance.getPlatformUri().toString());
     		settings.setShellUrl(instance.getShellUri().toString());
     		settings.setConnectionStatus(ConnectionStatus.Connected);

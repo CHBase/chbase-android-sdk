@@ -16,7 +16,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
 import com.chbase.Connection;
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.HttpStreamer;
 import com.chbase.android.simplexml.methods.beginputblob.request.BeginPutBlobRequest;
 import com.chbase.android.simplexml.methods.beginputblob.response.BeginPutBlobResponse;
@@ -710,7 +710,7 @@ public class Record {
 			throws IOException, URISyntaxException {
 		BeginPutBlobRequest request = new BeginPutBlobRequest();
 
-		Connection connection = HealthVaultApp.getInstance().getConnection();
+		Connection connection = CHBaseApp.getInstance().getConnection();
 
 		RequestTemplate requestTemplate = new RequestTemplate(
 				connection,
@@ -734,7 +734,7 @@ public class Record {
 
 		BeginPutBlobRequest request = new BeginPutBlobRequest();
 
-		Connection connection = HealthVaultApp.getInstance().getConnection();
+		Connection connection = CHBaseApp.getInstance().getConnection();
 
 		RequestTemplate requestTemplate = new RequestTemplate(
 				connection,
@@ -802,7 +802,7 @@ public class Record {
 
 	private RequestTemplate getRequestTemplate() {
 		return new RequestTemplate(
-				HealthVaultApp.getInstance().getConnection(),
+				CHBaseApp.getInstance().getConnection(),
 				personId,
 				id);
 	}

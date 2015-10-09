@@ -1,6 +1,6 @@
 package com.chbase.android;
 
-public interface HealthVaultInitializationHandler {
+public interface CHBaseInitializationHandler {
 
 	public void OnConnected();
 	

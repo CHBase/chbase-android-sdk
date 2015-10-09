@@ -1,6 +1,6 @@
 package com.chbase.android.hvsample;
 
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 
 import android.app.ListActivity;
@@ -19,7 +19,7 @@ public class RecordPickerActivity extends ListActivity {
         
         RecordPickerArrayAdapter adapter = 
 	            new RecordPickerArrayAdapter(this, 
-	            		HealthVaultApp.getInstance().getRecordList(),
+	            		CHBaseApp.getInstance().getRecordList(),
 	            		hvclient);
         
 		setListAdapter(adapter);

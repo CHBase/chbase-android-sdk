@@ -20,7 +20,7 @@ import java.net.URLEncoder;
 import com.chbase.Connection;
 import com.chbase.HVInstance;
 import com.chbase.HVInstanceResolver;
-import com.chbase.android.simplexml.HealthVaultApp.ConnectionStatus;
+import com.chbase.android.simplexml.CHBaseApp.ConnectionStatus;
 import com.chbase.android.simplexml.methods.getauthorizedpeople.request.GetAuthorizedPeopleParameters;
 import com.chbase.android.simplexml.methods.getauthorizedpeople.request.GetAuthorizedPeopleRequest;
 import com.chbase.android.simplexml.methods.getauthorizedpeople.response.GetAuthorizedPeopleResponse;
@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.CookieManager;
@@ -46,6 +47,7 @@ import android.webkit.WebViewClient;
  */
 public class ShellActivity extends Activity {
 
+	public static String TAG = ShellActivity.class.toString(); 
     /** The web view. */
     private WebView webView;
     
@@ -59,7 +61,7 @@ public class ShellActivity extends Activity {
      */
     public static Intent createAppAuthIntent(Activity ctx, String appId) {
         String queryString = 
-            HealthVaultApp.getInstance().getSettings().getShellUrl()
+            CHBaseApp.getInstance().getSettings().getShellUrl()
              + "/redirect.aspx?target=APPAUTH&targetqs=" 
              + "?appid=" + appId;
          
@@ -87,10 +89,10 @@ public class ShellActivity extends Activity {
              URLEncoder.encode(appToken),
              URLEncoder.encode("Android Phone"),
              appId,
-             HealthVaultApp.getInstance().getSettings().getIsMultiInstanceAware(),
-             HealthVaultApp.getInstance().getSettings().getIsMRA());  //TODO: phone name
+             CHBaseApp.getInstance().getSettings().getIsMultiInstanceAware(),
+             CHBaseApp.getInstance().getSettings().getIsMRA());  //TODO: phone name
          queryString = 
-             HealthVaultApp.getInstance().getSettings().getShellUrl() 
+             CHBaseApp.getInstance().getSettings().getShellUrl() 
              + "/redirect.aspx?target=CREATEAPPLICATION&targetqs=" 
              + URLEncoder.encode(queryString);
              
@@ -161,12 +163,13 @@ public class ShellActivity extends Activity {
      * The Class ShellWebViewClient.
      */
     private class ShellWebViewClient extends WebViewClient {
+    
         /* (non-Javadoc)
          * @see android.webkit.WebViewClient#onPageFinished(android.webkit.WebView, java.lang.String)
          */
         @Override
         public void onPageFinished(WebView view, String url) {
-            if (url.indexOf("complete") > 0) {
+            if (url.toLowerCase().indexOf("createapplicationcomplete.aspx") > 0) {
             	Uri uri = Uri.parse(url);
             	final String instanceId = uri.getQueryParameter("instanceid");
             	
@@ -183,15 +186,16 @@ public class ShellActivity extends Activity {
                    }
                 }.execute();
             }
+            Log.d(TAG, "Url " + url);
             super.onPageFinished(view, url);
         }
         
         private void resolveInstance(String instanceId) {
     		Connection connection = ConnectionFactory.getUnauthenticatedConnection();
-    		connection.setAppId(HealthVaultApp.getInstance().getSettings().getMasterAppId());
+    		connection.setAppId(CHBaseApp.getInstance().getSettings().getMasterAppId());
     		HVInstance instance = new HVInstanceResolver(connection)
     				.getInstanceForId(instanceId);	
-    		HealthVaultSettings settings = HealthVaultApp.getInstance().getSettings();
+    		CHBaseSettings settings = CHBaseApp.getInstance().getSettings();
     		settings.setServiceUrl(instance.getPlatformUri().toString());
     		settings.setShellUrl(instance.getShellUri().toString());
     		settings.setConnectionStatus(ConnectionStatus.Connected);
@@ -199,7 +203,7 @@ public class ShellActivity extends Activity {
         }
         
         private void resolveRecords() {
-    		HealthVaultApp hvApp = HealthVaultApp.getInstance();
+    		CHBaseApp hvApp = CHBaseApp.getInstance();
 
         	RequestTemplate requestTemplate = new RequestTemplate(
     				hvApp.getConnection());
@@ -220,7 +224,7 @@ public class ShellActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
-            
+            Log.d(TAG,"Url =" + url            		);
             return true;
         }
     }

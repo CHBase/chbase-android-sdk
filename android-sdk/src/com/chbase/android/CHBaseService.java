@@ -13,10 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.chbase.android.simplexml;
+package com.chbase.android;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -29,14 +28,8 @@ import com.chbase.HVSystemException;
 import com.chbase.Request;
 import com.chbase.Response;
 import com.chbase.SimpleSendStrategy;
-import com.chbase.android.simplexml.methods.getauthorizedpeople.request.GetAuthorizedPeopleParameters;
-import com.chbase.android.simplexml.methods.getauthorizedpeople.request.GetAuthorizedPeopleRequest;
-import com.chbase.android.simplexml.methods.getauthorizedpeople.response.GetAuthorizedPeopleResponse;
-import com.chbase.android.simplexml.methods.getauthorizedpeople.response.GetAuthorizedPeopleResponseInfo;
-import com.chbase.android.simplexml.methods.request.RequestTemplate;
-import com.chbase.android.simplexml.things.types.types.PersonInfo;
-import com.chbase.android.simplexml.things.types.types.Record;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -45,40 +38,34 @@ import android.util.Base64;
 /**
  * The Class HealthVaultService.
  */
-public class HealthVaultApp {
+public class CHBaseService {
     
     /** The instance. */
-    private static HealthVaultApp instance;
+    private static CHBaseService instance;
     
     /** The settings. */
-    private HealthVaultSettings settings;
-    
-    private Vocabs vocabs;
-    
-	private List<PersonInfo> personInfoList;
-    
-    private List<Record> recordList;
-    
-    private Record currentRecord;
+    private CHBaseSettings settings;
     
     /**
      * Initialize.
      * 
      * @param ctx the ctx
      */
-    public static HealthVaultApp getInstance(Context ctx) {
+    public static CHBaseService initialize(Context ctx) {
         if (instance == null) {
-        	HealthVaultSettings settings = new HealthVaultFileSettings(ctx);
-        	HealthVaultApp service = new HealthVaultApp(settings);
-        	service.initializeFromSettings(settings);
+        	CHBaseSettings settings = new CHBaseFileSettings(ctx);
+        	CHBaseService service = new CHBaseService(settings);
         	instance = service;
         }
         
         return instance;
     }
     
-    public static void setInstance(HealthVaultApp app) {
-    	instance = app;
+    public static CHBaseService initialize(CHBaseSettings settings) {
+    	CHBaseService service = new CHBaseService(settings);
+    	instance = service;
+    	
+    	return instance;
     }
     
     /**
@@ -86,7 +73,7 @@ public class HealthVaultApp {
      * 
      * @return single instance of HealthVaultService
      */
-    public static HealthVaultApp getInstance() {
+    public static CHBaseService getInstance() {
     	return instance;
     }
     
@@ -95,50 +82,17 @@ public class HealthVaultApp {
      * 
      * @param ctx the ctx
      */
-    public HealthVaultApp(HealthVaultSettings settings) {
+    private CHBaseService(CHBaseSettings settings) {
         this.settings = settings;
-        vocabs = new Vocabs();
-        ConfigureLog4J.configure();
-        initializeFromSettings(settings);
-    }
-
-    private void initializeFromSettings(HealthVaultSettings settings) {
-    	String serializedAuthorizedRecords = settings.getAuthorizedRecordsResponse();
-    	
-    	if (serializedAuthorizedRecords == null) {
-    		return;
-    	}
-    	
-    	GetAuthorizedPeopleResponseInfo response = XmlSerializer.safeRead(
-    			GetAuthorizedPeopleResponseInfo.class, serializedAuthorizedRecords);
-    	
-    	if (response != null) {
-    		populatePersonInfo(response);
-    	}
     }
     
-    public Record getCurrentRecord() {
-		return currentRecord;
-	}
-
-	public void setCurrentRecord(Record currentRecord) {
-		this.currentRecord = currentRecord;
-	}
-
-	public List<Record> getRecordList() {
-		return Collections.unmodifiableList(recordList);
-	}
     /**
      * Gets the settings.
      * 
      * @return the settings
      */
-    public HealthVaultSettings getSettings() {
+    public CHBaseSettings getSettings() {
         return settings;
-    }
-    
-    public Vocabs getVocabs() {
-        return vocabs;
     }
     
     /**
@@ -146,20 +100,19 @@ public class HealthVaultApp {
      * 
      * @return the intent
      */
-    public void start(final Context ctx, final HealthVaultInitializationHandler healthVaultInitializationHandler) {
-         
+    public void connect(final Context ctx, final CHBaseInitializationHandler handler) {
+    	 final ProgressDialog progress = ProgressDialog.show(
+                ctx, 
+                "",
+                "Please wait...", 
+                true);
             
     	 new AsyncTask<Context, Void, Intent>() {
             private Exception exception;
             
             protected Intent doInBackground(Context... context) {
                 try {    
-                    Intent intent = getNextIntent(context[0]);
-                    if (intent == null) {
-                    	resolvePersonInfoList();
-                    } else {
-                    	return intent;
-                    }
+                    return getNextIntent(context[0]);
                 } catch(Exception e) {
                     exception = e;
                 }
@@ -168,15 +121,16 @@ public class HealthVaultApp {
            
            @Override
            protected void onPostExecute(Intent intent) {
+               progress.dismiss();
                if (exception != null) {
-            	   healthVaultInitializationHandler.onError(exception);
+            	   handler.onError(exception);
                } else {
                    if (intent != null) {
                        ctx.startActivity(intent);
                    }
                    else
                    {
-                       healthVaultInitializationHandler.onConnected();
+                       handler.OnConnected();
                    }
                }
            }
@@ -312,9 +266,44 @@ public class HealthVaultApp {
      */
     public List<PersonInfo> getPersonInfoList()
     {    
-    	return Collections.unmodifiableList(personInfoList);
+        Connection connection = getConnection();
+        HVAccessor accessor = new HVAccessor();
+        Request request = new Request();
+        request.setMethodName("GetAuthorizedPeople");
+        request.setInfo("<info><parameters/></info>");
+        accessor.send(request, connection);
+        Response response = accessor.getResponse();
+        
+        ArrayList<PersonInfo> personInfoList = new ArrayList<PersonInfo>();
+        
+        try {
+        
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(false);
+            XmlPullParser parser= factory.newPullParser();    
+            parser.setInput(response.getInputStream(), "utf8");
+            
+            XmlUtils.nextStartTag(parser, "response");
+            XmlUtils.nextStartTag(parser, "status");
+            XmlUtils.skipSubTree(parser);
+            XmlUtils.nextStartTag(parser, "wc:info");
+            XmlUtils.nextStartTag(parser, "response-results");
+            
+            while( parser.nextTag() == XmlPullParser.START_TAG) {
+                if("person-info".equals(parser.getName())) {
+                    personInfoList.add(new PersonInfo(parser));
+                } 
+                else
+                {
+                    XmlUtils.skipSubTree(parser);
+                }
+            }
+        } catch( Exception e) {
+            throw new HVSystemException(e);
+        }
+        return personInfoList;
     }
-   
+    
     /**
      * Gets the connection.
      * 
@@ -325,10 +314,6 @@ public class HealthVaultApp {
         return ConnectionFactory.getConnection(
             settings.getAppId(),
             Base64.decode(settings.getAuthenticationSecret(), Base64.DEFAULT));
-    }
-    
-    public boolean isAppConnected() {
-    	return this.getConnectionStatus() == ConnectionStatus.Connected;
     }
     
     /**
@@ -344,38 +329,5 @@ public class HealthVaultApp {
         
         /** The Connected. */
         Connected
-    }
-
-	public void resolvePersonInfoList() {
-        RequestTemplate requestTemplate = new RequestTemplate(getConnection());
-		
-		GetAuthorizedPeopleRequest request = new GetAuthorizedPeopleRequest(
-				new GetAuthorizedPeopleParameters());
-		
-		GetAuthorizedPeopleResponse response = requestTemplate.makeRequest(
-				request, 
-				GetAuthorizedPeopleResponse.class);
-		
-		GetAuthorizedPeopleResponseInfo info = response.getInfo();
-		settings.setAuthorizedRecordsResponse(XmlSerializer.safeWrite(info));
-		settings.save();
-    	
-		populatePersonInfo(info);
-	}
-			
-	private void populatePersonInfo(GetAuthorizedPeopleResponseInfo response) {
-		personInfoList = response.getResponseResults().getPersonInfoList();
-		
-		recordList = new ArrayList<Record>();
-		
-		for (PersonInfo pi : personInfoList) {
-			for (Record r : pi.getRecords()) {
-				recordList.add(r);
-			}
-		}
-		
-		if (recordList.size() > 0) {
-			currentRecord = recordList.get(0);
-		}
     }
 }

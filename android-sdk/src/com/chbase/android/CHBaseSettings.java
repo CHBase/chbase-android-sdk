@@ -13,13 +13,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.chbase.android.simplexml;
+package com.chbase.android;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface HealthVaultSettings.
  */
-public interface HealthVaultSettings {
+public interface CHBaseSettings {
 
 	
 	/**
@@ -109,23 +109,19 @@ public interface HealthVaultSettings {
      * 
      * @return the connection status
      */
-    public HealthVaultApp.ConnectionStatus getConnectionStatus();
+    public CHBaseService.ConnectionStatus getConnectionStatus();
     
     /**
      * Sets the connection status.
      * 
      * @param status the new connection status
      */
-    public void setConnectionStatus(HealthVaultApp.ConnectionStatus status);
+    public void setConnectionStatus(CHBaseService.ConnectionStatus status);
     
     public boolean getIsMRA();
-	
-	public void setIsMRA(boolean isAware);
-	
-	public void setAuthorizedRecordsResponse(String response);
-	
-	public String getAuthorizedRecordsResponse();
-	
+    
+    public void setIsMRA(boolean isMRA);
+    
     /**
      * Save.
      */

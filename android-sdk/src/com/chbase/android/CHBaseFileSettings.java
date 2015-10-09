@@ -27,7 +27,7 @@ import android.content.Context;
 /**
  * The Class HealthVaultFileSettings.
  */
-public class HealthVaultFileSettings implements HealthVaultSettings {
+public class CHBaseFileSettings implements CHBaseSettings {
 
     /** The properties. */
     private Properties properties;
@@ -40,7 +40,7 @@ public class HealthVaultFileSettings implements HealthVaultSettings {
      * 
      * @param ctx the ctx
      */
-    public HealthVaultFileSettings(Context ctx)
+    public CHBaseFileSettings(Context ctx)
     {
         this.ctx = ctx;
         
@@ -148,21 +148,21 @@ public class HealthVaultFileSettings implements HealthVaultSettings {
     /* (non-Javadoc)
      * @see com.microsoft.hsg.android.HealthVaultSettings#getConnectionStatus()
      */
-    public HealthVaultService.ConnectionStatus getConnectionStatus()
+    public CHBaseService.ConnectionStatus getConnectionStatus()
     {
         if (properties.containsKey("connected")) {
-            return HealthVaultService.ConnectionStatus.Connected;
+            return CHBaseService.ConnectionStatus.Connected;
         }
         else {
-            return HealthVaultService.ConnectionStatus.NotConnected;
+            return CHBaseService.ConnectionStatus.NotConnected;
         }
     }
     
     /* (non-Javadoc)
      * @see com.microsoft.hsg.android.HealthVaultSettings#setConnectionStatus(com.microsoft.hsg.android.HealthVaultService.ConnectionStatus)
      */
-    public void setConnectionStatus(HealthVaultService.ConnectionStatus status) {
-        if (status == HealthVaultService.ConnectionStatus.Connected) {
+    public void setConnectionStatus(CHBaseService.ConnectionStatus status) {
+        if (status == CHBaseService.ConnectionStatus.Connected) {
             properties.setProperty("connected", "true");
         } else {
         	properties.remove("connected");

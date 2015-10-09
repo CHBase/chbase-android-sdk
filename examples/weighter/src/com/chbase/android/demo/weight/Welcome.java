@@ -26,34 +26,35 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chbase.android.HealthVaultFileSettings;
-import com.chbase.android.HealthVaultInitializationHandler;
-import com.chbase.android.HealthVaultService;
-import com.chbase.android.HealthVaultSettings;
+import com.chbase.ApplicationConfig;
+import com.chbase.android.CHBaseFileSettings;
+import com.chbase.android.CHBaseInitializationHandler;
+import com.chbase.android.CHBaseService;
+import com.chbase.android.CHBaseSettings;
 
 public class Welcome 
 	extends Activity
-	implements HealthVaultInitializationHandler {
+	implements CHBaseInitializationHandler {
 
-    private HealthVaultService service;
+    private CHBaseService service;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
         
-        service = HealthVaultService.initialize(this);
-        HealthVaultSettings settings = service.getSettings();
+        service = CHBaseService.initialize(this);
+        CHBaseSettings settings = service.getSettings();
         
-        if (settings.getConnectionStatus() == HealthVaultService.ConnectionStatus.Connected)
+        if (settings.getConnectionStatus() == CHBaseService.ConnectionStatus.Connected)
         {
         	OnConnected();
         }
         else
         {
-		    settings.setMasterAppId("c6ba979f-c342-4408-a2bc-0dfb43b2bf8d");
-		    settings.setServiceUrl("https://platform.healthvault-ppe.com/platform/wildcat.ashx");
-		    settings.setShellUrl("https://account.healthvault-ppe.com");
+        	settings.setMasterAppId("4f44350e-fa2b-49b9-b1c6-6f97a3baa331");
+		    settings.setServiceUrl("http://chbaseplatform-ppev2.dev.grcdemo.com/platform/wildcat.ashx");
+		    settings.setShellUrl("http://chbase-ppev2.dev.grcdemo.com");
 		    settings.setIsMultiInstanceAware(true);   
         }
         
@@ -68,7 +69,7 @@ public class Welcome
 
     @Override
     protected void onResume() {
-    	if (service.getSettings().getConnectionStatus() == HealthVaultService.ConnectionStatus.Connected) {
+    	if (service.getSettings().getConnectionStatus() == CHBaseService.ConnectionStatus.Connected) {
         	OnConnected();
         }
     	
@@ -83,7 +84,7 @@ public class Welcome
             msg.setText("Work With Your Weight");
             break;
         case NotConnected:
-            msg.setText("Connect this application to HealthVault");
+            msg.setText("Connect this application to CHBase");
             break;
         }
     }

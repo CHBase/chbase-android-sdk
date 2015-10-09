@@ -2,7 +2,7 @@ package com.chbase.android.hvsample;
 
 import java.util.ArrayList;
 
-import com.chbase.android.simplexml.HealthVaultApp;
+import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.Vocabs;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.methods.searchvocabulary.response.VocabQueryResult;
@@ -88,7 +88,7 @@ public class VocabAutoCompleteAdapter extends ArrayAdapter<String> implements Fi
     }
     
     private ArrayList<String> autocomplete(String searchText) {
-    	Vocabs vocabs = HealthVaultApp.getInstance().getVocabs();
+    	Vocabs vocabs = CHBaseApp.getInstance().getVocabs();
     	VocabQueryResult result = vocabs.search(vocabKey, searchText);
     	ArrayList<String> results = new ArrayList<String>();
     	

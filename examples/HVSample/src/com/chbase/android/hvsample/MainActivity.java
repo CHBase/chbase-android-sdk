@@ -3,9 +3,9 @@ package com.chbase.android.hvsample;
 import java.io.FileOutputStream;
 
 import com.chbase.HVException;
-import com.chbase.android.simplexml.HealthVaultApp;
-import com.chbase.android.simplexml.HealthVaultInitializationHandler;
-import com.chbase.android.simplexml.HealthVaultSettings;
+import com.chbase.android.simplexml.CHBaseApp;
+import com.chbase.android.simplexml.CHBaseInitializationHandler;
+import com.chbase.android.simplexml.CHBaseSettings;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
 
@@ -27,17 +27,15 @@ import android.widget.Toast;
 
 public class MainActivity 
 	extends ListActivity 
-	implements HealthVaultInitializationHandler {
+	implements CHBaseInitializationHandler {
 
-	private HealthVaultApp service;
+	private CHBaseApp service;
 	private HealthVaultClient hvClient;
 	
 	private ProgressDialog connectProgressDialog;
 	
 	String[] tests = {
             "WeightPutGet",
-            "FileUpload",
-            "FileDownload",
             "VocabTest",
             "LocalVault"
     };
@@ -47,7 +45,7 @@ public class MainActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		service = HealthVaultApp.getInstance(this);
+		service = CHBaseApp.getInstance(this);
 		if (service.isAppConnected()) {
 			service.start(this, this);
 		}
@@ -88,7 +86,7 @@ public class MainActivity
 		RelativeLayout recordNameLayout = (RelativeLayout) menu.findItem(R.id.record_name_layout).getActionView();
         TextView tv = (TextView) recordNameLayout.findViewById(R.id.current_record_name);
         
-        HealthVaultApp application = HealthVaultApp.getInstance();
+        CHBaseApp application = CHBaseApp.getInstance();
 		if(service.isAppConnected() && application.getCurrentRecord() != null) {	
 	       tv.setText(application.getCurrentRecord().getName());
 	       
@@ -137,10 +135,10 @@ public class MainActivity
                     "Please wait...", 
                     true);
 			
-			HealthVaultSettings settings = service.getSettings();
-			settings.setMasterAppId("c6ba979f-c342-4408-a2bc-0dfb43b2bf8d");
-			settings.setServiceUrl("https://platform.healthvault-ppe.com/platform/wildcat.ashx");
-			settings.setShellUrl("https://account.healthvault-ppe.com");
+			CHBaseSettings settings = service.getSettings();
+			settings.setMasterAppId("4f44350e-fa2b-49b9-b1c6-6f97a3baa331");
+		    settings.setServiceUrl("http://chbaseplatform-ppev2.dev.grcdemo.com/platform/wildcat.ashx");
+		    settings.setShellUrl("http://chbase-ppev2.dev.grcdemo.com");
 			settings.setIsMultiInstanceAware(true);
 			settings.setIsMRA(true);
 			service.start(MainActivity.this, MainActivity.this);
@@ -268,10 +266,10 @@ public class MainActivity
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			
-			HealthVaultSettings settings = service.getSettings();
-			settings.setMasterAppId("c6ba979f-c342-4408-a2bc-0dfb43b2bf8d");
-			settings.setServiceUrl("https://platform.healthvault-ppe.com/platform/wildcat.ashx");
-			settings.setShellUrl("https://account.healthvault-ppe.com");
+			CHBaseSettings settings = service.getSettings();
+			settings.setMasterAppId("4f44350e-fa2b-49b9-b1c6-6f97a3baa331");
+		    settings.setServiceUrl("http://chbaseplatform-ppev2.dev.grcdemo.com/platform/wildcat.ashx");
+		    settings.setShellUrl("http://chbase-ppev2.dev.grcdemo.com");
 			settings.setIsMultiInstanceAware(true);
 			
 			service.start(MainActivity.this, MainActivity.this);
