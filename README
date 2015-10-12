@@ -1,3 +1,5 @@
+This project is derived from the HealthVault Java SDK (https://healthvaultjavalib.codeplex.com/)
+
 With Eclipse Android Development Tools, 
 	select File-->Import
 	select General-->Existing Projects Into Workspace
