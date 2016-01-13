@@ -296,6 +296,7 @@ public class WeightActivity extends Activity {
         
         Request request = new Request();
         request.setMethodName("PutThings");
+        request.setMethodVersion("2");
         request.setInfo(infoBuilder.toString());
         template.makeRequest(request);
     }
@@ -317,6 +318,7 @@ public class WeightActivity extends Activity {
         
         Request request = new Request();
         request.setMethodName("GetThings");
+        request.setMethodVersion("3");
         request.setInfo(info);
         
         return (List<String>)template.makeRequest(request, new RequestMarshaller() {
