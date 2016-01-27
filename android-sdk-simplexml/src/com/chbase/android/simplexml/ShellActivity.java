@@ -62,7 +62,7 @@ public class ShellActivity extends Activity {
     public static Intent createAppAuthIntent(Activity ctx, String appId) {
     	String qs = "appid=" + appId;
         String url = 
-            CHBaseService.getInstance().getSettings().getShellUrl()
+            CHBaseApp.getInstance().getSettings().getShellUrl()
              + "/redirect.aspx?target=APPAUTH&targetqs=" 
              + URLEncoder.encode(qs);
          
