@@ -1,4 +1,4 @@
-This project is derived from the Healthvault Java SDK (https://healthvaultjavalib.codeplex.com/)
+This project is derived from the Healthvault Java SDK (https://healthvaultjavalib.codeplex.com/). In addition to supporting CHBase, this SDK supports the latest version of HealthVault, including its Methods and Datatypes and is actively maintained.
 
 With Eclipse Android Development Tools, 
 	select File-->Import
