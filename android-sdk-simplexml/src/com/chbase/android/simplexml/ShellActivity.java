@@ -86,10 +86,9 @@ public class ShellActivity extends Activity {
             String appToken,
             String appId) {
         String queryString = String.format(
-             "?appCreationToken=%s&instanceName=%s&appid=%s&aib=%s&ismra=%s",
+             "?appCreationToken=%s&instanceName=%s&aib=%s&ismra=%s",
              URLEncoder.encode(appToken),
              URLEncoder.encode("Android Phone"),
-             appId,
              CHBaseApp.getInstance().getSettings().getIsMultiInstanceAware(),
              CHBaseApp.getInstance().getSettings().getIsMRA());  //TODO: phone name
          queryString = 
