@@ -23,3 +23,4 @@ rootProject.name = "chbaseandroidsdk"
 include(":android-sdk")
 include(":android-sdk-simplexml")
 include(":examples:hvsample")
+include(":examples:weighter-simplexml")
