@@ -1,17 +1,17 @@
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.android.application)
 }
 
 android {
-    namespace = "com.chbase.android"
+    namespace = "com.chbase.android.demo.weight"
     compileSdk = 34
 
     defaultConfig {
-
+        applicationId = "com.chbase.android.demo.weight"
         minSdk = 26
         targetSdk = 34
-        
-
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,6 +38,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    api(files("libs/chbase-sdk.jar"))
-    implementation("commons-codec:commons-codec:1.17.2")
+    api(project(":android-sdk"))
+    implementation(libs.commons.codec)
 }

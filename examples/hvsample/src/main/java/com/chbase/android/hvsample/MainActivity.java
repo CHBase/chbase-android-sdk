@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,6 +60,14 @@ public class MainActivity
 
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tests));
+		Button clickButton = (Button) findViewById(R.id.connect_button);
+		clickButton.setOnClickListener( new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				doConnect();
+			}
+		});
 	}
 	
 	@Override
@@ -82,32 +91,6 @@ public class MainActivity
 		
 		hvClient.stop();
 	}
-    
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		RelativeLayout recordNameLayout = (RelativeLayout) menu.findItem(R.id.record_name_layout).getActionView();
-        TextView tv = (TextView) recordNameLayout.findViewById(R.id.current_record_name);
-        
-        CHBaseApp application = CHBaseApp.getInstance();
-		if(service.isAppConnected() && application.getCurrentRecord() != null) {	
-	       tv.setText(application.getCurrentRecord().getName());
-	       
-	       recordNameLayout.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					Intent intent = new Intent(MainActivity.this, RecordPickerActivity.class);
-					startActivity(intent);
-				}
-			});
-		}
-		else {
-			tv.setVisibility(View.GONE);
-		}
-		return  true;
-	}
-
 	public void onConnected() {
 	}
 
