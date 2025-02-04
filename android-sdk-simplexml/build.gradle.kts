@@ -9,7 +9,6 @@ android {
     defaultConfig {
 
         minSdk = 26
-        targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
@@ -37,6 +36,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     api(files("libs/chbase-sdk.jar"))
-    implementation("org.simpleframework:simple-xml:2.7.1")
-    implementation("commons-codec:commons-codec:1.9")
+    implementation(libs.simple.xml)
+    implementation(libs.commons.codec)
 }
