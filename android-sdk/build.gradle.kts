@@ -1,5 +1,3 @@
-import org.apache.tools.ant.util.JavaEnvUtils.VERSION_11
-
 plugins {
     id("com.android.library")
 }
@@ -11,7 +9,6 @@ android {
     defaultConfig {
 
         minSdk = 26
-        targetSdk = 34
         
 
 
@@ -28,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
