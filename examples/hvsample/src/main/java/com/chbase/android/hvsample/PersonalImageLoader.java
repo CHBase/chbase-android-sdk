@@ -59,7 +59,7 @@ public class PersonalImageLoader implements ComponentCallbacks2 {
         	Record record = null;
         	
         	for(Record rcd : records) {
-        		if(id == rcd.getId()) {
+        		if(id.equals(rcd.getId())) {
         			record = rcd;
         			break;
         		}

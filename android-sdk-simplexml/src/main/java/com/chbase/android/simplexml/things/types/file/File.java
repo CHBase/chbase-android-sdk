@@ -119,7 +119,7 @@ public class File extends AbstractThing {
 			InputStream source)
 		throws IOException, URISyntaxException {
 		
-		if(contentType == null || contentType.trim() == "") {
+		if(contentType == null || contentType.trim().equals("")) {
 			contentType = HttpStreamer.OctetStreamMimeType;
 		}
 		

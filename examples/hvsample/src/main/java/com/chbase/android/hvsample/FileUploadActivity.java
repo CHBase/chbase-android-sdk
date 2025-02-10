@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 
 public class FileUploadActivity extends Activity {
+	private static String ActivityName  = "FileUploadActivity";
 	
 	CHBaseApp service;
 	HealthVaultClient hvClient;
@@ -55,13 +57,13 @@ public class FileUploadActivity extends Activity {
                 os = openFileOutput(filename, Context.MODE_PRIVATE);
                 os.write(data);
             } catch (Exception e) {
-                Log.e("FileUpload", "Error writing to file " + filename, e);
+                Log.e(FileUploadActivity.ActivityName, "Error writing to file " + filename, e);
             } finally {
                 try {
                     if (os != null)
                         os.close();
                 } catch (Exception e) {
-                    Log.e("FileUpload", "Error closing file " + filename, e);
+                    Log.e(FileUploadActivity.ActivityName, "Error closing file " + filename, e);
                     success = false;
                 } 
             }
@@ -77,13 +79,13 @@ public class FileUploadActivity extends Activity {
 	        				new FileUploadActivityCallback<Void>());
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e(FileUploadActivity.ActivityName, "FileNotFoundException: " + filename, e);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e(FileUploadActivity.ActivityName, "IOException:" + filename, e);
 				} catch (URISyntaxException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.e(FileUploadActivity.ActivityName, "URISyntaxException:" + filename, e);
 				}
             }
         }
@@ -111,7 +113,7 @@ public class FileUploadActivity extends Activity {
                         camera.setPreviewDisplay(holder);
                     }
                 } catch (IOException exception) {
-                    exception.printStackTrace();
+                    Log.e(FileUploadActivity.ActivityName, "onCreate failed:IOException", exception);
                 }
             }
 
@@ -200,7 +202,7 @@ public class FileUploadActivity extends Activity {
 	            				new FileUploadActivityCallback<Void>());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Log.e(FileUploadActivity.ActivityName, "Error closing file " + filename, e);
 					}
             	}
             }
@@ -217,7 +219,7 @@ public class FileUploadActivity extends Activity {
 	}
 	
 	private String writeFile() {
-		String filename = "writefile" + (int)(Math.random() * 100)  + ".txt";
+		String filename = "writefile" + System.currentTimeMillis()  + ".txt";
 		String string = "This is from file upload";
 		FileOutputStream outputStream;
 
@@ -228,7 +230,7 @@ public class FileUploadActivity extends Activity {
 		  
 		  return filename;
 		} catch (Exception e) {
-		  e.printStackTrace();
+		  Log.e(FileUploadActivity.ActivityName, "Error closing file " + filename, e);
 		}
 		
 		return null;
@@ -239,7 +241,7 @@ public class FileUploadActivity extends Activity {
 		@Override
 		public void onError(HVException exception) {
 			// TODO Auto-generated method stub
-			Toast.makeText(FileUploadActivity.this, exception.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(FileUploadActivity.this, Arrays.toString(exception.getStackTrace()), Toast.LENGTH_SHORT).show();
 		}
 
 		@Override

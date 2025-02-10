@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -161,64 +162,10 @@ public class MainActivity
         	startActivity(intent);
         }
     }
-	
-	/*private void registerHandlers() {
 
-		// Connect button
-		Button connect = (Button) findViewById(R.id.connect);
-		connect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	doConnect();
-            }
-        });
-		
-		Button weightsBtn = (Button) findViewById(R.id.weights);
-		weightsBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	if (service.isAppConnected()) {
-            		Intent intent = new Intent(MainActivity.this, WeightActivity.class);
-                    startActivity(intent);
-            	}
-            }
-        });
-		
-		Button fileUploadBtn = (Button) findViewById(R.id.fileUpload);
-		fileUploadBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressWarnings("unchecked")
-			public void onClick(View view) {
-            	if (service.isAppConnected()) {
-            		String filename = writeFile();
-            		
-            		InputStream source;
-					try {
-						source = openFileInput(filename);
-						
-						File hvFile = new File();
-						hvFile.setName(filename);
-						
-						hvClient.start();
-	            		
-	            		hvClient.asyncRequest(hvFile.uploadAsync(((HVApp)getApplication()).getCurrentRecord(), null, source), 
-	            				new MainActivityCallback(MainActivityCallback.UpdateRecords));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-            	}
-            }
-        });
-		
-		Button vocabTest = (Button) findViewById(R.id.vocabTest);
-		vocabTest.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	Intent intent  = new Intent(MainActivity.this, VocabActivity.class);
-            	startActivity(intent);
-            }
-        });
-	}*/
 
 	private String writeFile() {
-		String filename = "writefile" + (int)(Math.random() * 100)  + ".txt";
+		String filename = "writefile" + System.currentTimeMillis()  + ".txt";
 		String string = "This is from file upload";
 		FileOutputStream outputStream;
 
@@ -229,7 +176,7 @@ public class MainActivity
 		  
 		  return filename;
 		} catch (Exception e) {
-		  e.printStackTrace();
+			Log.e("MainActivity", "Error opening file " + filename, e);
 		}
 		
 		return null;
