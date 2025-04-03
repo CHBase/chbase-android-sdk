@@ -6,19 +6,28 @@ import org.simpleframework.xml.Order;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;summary xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:ds="" xmlns:this="urn:com.microsoft.wc.thing" xmlns:wc-auth="urn:com.microsoft.wc.auth" xmlns:wc-types="urn:com.microsoft.wc.types"&gt;
- *                     Defines a loose relationship between instances of things within a record.
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;summary xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:ds="" xmlns:this="urn:com.microsoft.wc.thing" xmlns:wc-auth="urn:com.microsoft.wc.auth" xmlns:wc-types="urn:com.microsoft.wc.types"&gt;
+
+ *                     Defines a loose relationship between instances of things within a record.
+
  *                 &lt;/summary&gt;
  * </pre>
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;remarks xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:ds="" xmlns:this="urn:com.microsoft.wc.thing" xmlns:wc-auth="urn:com.microsoft.wc.auth" xmlns:wc-types="urn:com.microsoft.wc.types"&gt;
- *                     This relationship is completely application defined and maintained.
- *                     HealthVault does nothing to ensure that related things exist
- *                     or have a relationship back to this thing.
- *                     An example usage for related-things are to use an annotation thing
- *                     instance to make medical annotations for another thing type or to relate
- *                     a file instance (like an MRI) to problem instance.
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;remarks xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:ds="" xmlns:this="urn:com.microsoft.wc.thing" xmlns:wc-auth="urn:com.microsoft.wc.auth" xmlns:wc-types="urn:com.microsoft.wc.types"&gt;
+
+ *                     This relationship is completely application defined and maintained.
+
+ *                     HealthVault does nothing to ensure that related things exist
+
+ *                     or have a relationship back to this thing.
+
+ *                     An example usage for related-things are to use an annotation thing
+
+ *                     instance to make medical annotations for another thing type or to relate
+
+ *                     a file instance (like an MRI) to problem instance.
+
  *                 &lt;/remarks&gt;
  * </pre>
  * 
@@ -56,7 +65,7 @@ import org.simpleframework.xml.Order;
 })
 public class RelatedThing {
 
-    @Element(name = "thing-id", required=true)
+    @Element(name = "thing-id", required=false)
     protected String thingId;
 
     @Element(name = "version-stamp", required=false)

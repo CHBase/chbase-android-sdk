@@ -12,6 +12,7 @@ import com.chbase.android.simplexml.things.types.condition.Condition;
 import com.chbase.android.simplexml.things.types.file.File;
 import com.chbase.android.simplexml.things.types.height.Height;
 import com.chbase.android.simplexml.things.types.immunization.Immunization;
+import com.chbase.android.simplexml.things.types.labresult.LabResult;
 import com.chbase.android.simplexml.things.types.medication.Medication;
 import com.chbase.android.simplexml.things.types.personal.PersonalDemographics;
 import com.chbase.android.simplexml.things.types.personalimage.PersonalImage;
@@ -64,7 +65,8 @@ public class DataXml {
 		@Element(name="procedure", type=Procedure.class),
 		@Element(name="immunization", type=Immunization.class),
 		@Element(name="cholesterol-profile", type=Cholesterol.class),
-		@Element(name="file", type=File.class)
+		@Element(name="file", type=File.class),
+        @Element(name="lab-test-results", type= LabResult.class)
 	})
     protected AbstractThing any;
     

@@ -69,7 +69,7 @@ public class Common {
     protected List<RelatedThing> relatedThing;
 
     @Element(name = "client-thing-id", required=false)
-    protected String255 clientThingId;
+    protected String clientThingId;
 
     /**
      * Gets the value of the source property.
@@ -210,7 +210,7 @@ public class Common {
      *     
      */
     public String getClientThingId() {
-        return clientThingId == null ? null : clientThingId.getValue();
+        return clientThingId == null ? null : clientThingId;
     }
 
     /**
@@ -222,7 +222,7 @@ public class Common {
      *     
      */
     public void setClientThingId(String value) {
-        this.clientThingId = new String255(value);
+        this.clientThingId = value;
     }
 
 }
