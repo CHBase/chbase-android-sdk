@@ -16,10 +16,12 @@
 package com.chbase.android.demo.weight;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.chbase.HVException;
+import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
 import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
@@ -27,6 +29,12 @@ import com.chbase.android.simplexml.client.RequestCallback;
 import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
 import com.chbase.android.simplexml.methods.getthings3.response.ThingResponseGroup2;
 import com.chbase.android.simplexml.things.thing.Thing2;
+import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveContactType;
+import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
+import com.chbase.android.simplexml.things.types.base.CodableValue;
+import com.chbase.android.simplexml.things.types.base.Contact;
+import com.chbase.android.simplexml.things.types.base.Name;
+import com.chbase.android.simplexml.things.types.dates.DateTime;
 import com.chbase.android.simplexml.things.types.types.PersonInfo;
 import com.chbase.android.simplexml.things.types.types.Record;
 import com.chbase.android.simplexml.things.types.weight.Weight;
@@ -114,7 +122,7 @@ public class WeightActivity extends Activity {
 
     /**
      * Called when the activity is first created.
-     * 
+     *
      * @param savedInstanceState the saved instance state
      */
     @Override
@@ -132,7 +140,7 @@ public class WeightActivity extends Activity {
                     WeightActivity.this, service.getAppId()));
             }
         });
-        
+
         Button newApp = (Button) findViewById(R.id.newapp);
         newApp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -142,7 +150,7 @@ public class WeightActivity extends Activity {
                 finish();
             }
         });
-        
+
         Button putThing = (Button) findViewById(R.id.putThing);
         putThing.setOnClickListener(new View.OnClickListener() {
              public void onClick(View view) {
@@ -150,7 +158,9 @@ public class WeightActivity extends Activity {
                 putWeight(text.getText().toString());
              }
         });
-        
+
+        handleAdvDirective();
+
         Spinner s = (Spinner) findViewById(R.id.spinner);
         s.setOnItemSelectedListener( new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
@@ -163,9 +173,46 @@ public class WeightActivity extends Activity {
             }
         });
     }
-    
- 
-	@Override
+
+    private void handleAdvDirective() {
+        Button btnPutAdvDirective = (Button) findViewById(R.id.btnPutAdvDirective);
+        btnPutAdvDirective.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                putAdvDirectiveEntry();
+            }
+        });
+    }
+
+    private void putAdvDirectiveEntry() {
+        final Thing2 thing = new Thing2();
+        AdvanceDirectiveV2 directive = new AdvanceDirectiveV2();
+        directive.setWhen(DateTime.fromCalendar(Calendar.getInstance()));
+        directive.setName("Test Advance Directive");
+
+        Name name = new Name();
+        name.setFull("John Doe");
+
+        AdvanceDirectiveContactType contactInfo = new AdvanceDirectiveContactType();
+        contactInfo.setName(name);
+        contactInfo.setId("12345");
+        contactInfo.setContactInfo(new Contact());
+
+        contactInfo.setRelationship(new CodableValue("Family"));
+        contactInfo.setIsPrimary(true);
+
+        directive.getContact().add(contactInfo);
+        thing.setData(directive);
+
+        hvClient.asyncRequest(
+                selectedRecord.putThingAsync(thing),
+                new AdvanceDirectiveCallback(hvClient, selectedRecord, WeightActivity.this, AdvanceDirectiveCallback.Create));
+
+
+    }
+
+
+    @Override
 	protected void onStart() {
 		hvClient.start();
 		super.onStart();

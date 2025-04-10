@@ -25,6 +25,13 @@
 		<EditText android:text="" android:id="@+id/weightInput" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight=".8" android:numeric="decimal|integer"></EditText>
 		<Button android:layout_width="wrap_content" android:id="@+id/putThing" android:text="Add" android:layout_gravity="right" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
 	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		>
+		<Button android:layout_width="wrap_content" android:id="@+id/btnPutAdvDirective" android:text="Add Advance directive entry" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
+	</LinearLayout>
 	<ListView android:id="@+id/weightList" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="right"></ListView>
 	
 </LinearLayout>

@@ -4,6 +4,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementUnion;
 
+import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
 import com.chbase.android.simplexml.things.types.appointment.Appointment;
 import com.chbase.android.simplexml.things.types.base.Person;
@@ -66,7 +67,8 @@ public class DataXml {
 		@Element(name="immunization", type=Immunization.class),
 		@Element(name="cholesterol-profile", type=Cholesterol.class),
 		@Element(name="file", type=File.class),
-        @Element(name="lab-test-results", type= LabResult.class)
+        @Element(name="lab-test-results", type= LabResult.class),
+        @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class)
 	})
     protected AbstractThing any;
     
