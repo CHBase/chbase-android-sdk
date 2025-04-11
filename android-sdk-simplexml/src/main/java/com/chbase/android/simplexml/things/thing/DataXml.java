@@ -20,6 +20,7 @@ import com.chbase.android.simplexml.things.types.personal.PersonalDemographics;
 import com.chbase.android.simplexml.things.types.personalimage.PersonalImage;
 import com.chbase.android.simplexml.things.types.procedure.Procedure;
 import com.chbase.android.simplexml.things.types.sleepsessionv2.SleepSessionV2;
+import com.chbase.android.simplexml.things.types.weblink.Link;
 import com.chbase.android.simplexml.things.types.weight.Weight;
 
 /**
@@ -72,7 +73,8 @@ public class DataXml {
             @Element(name="lab-test-results", type= LabResult.class),
             @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class),
             @Element(name="bmi", type= Bmi.class),
-            @Element(name="sleep-session-v2", type= SleepSessionV2.class)
+            @Element(name="sleep-session-v2", type= SleepSessionV2.class),
+            @Element(name="link", type= Link.class),
 	})
     protected AbstractThing any;
     
