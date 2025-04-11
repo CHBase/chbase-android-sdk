@@ -16,29 +16,18 @@
 package com.chbase.android.demo.weight;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.chbase.HVException;
 import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
+import com.chbase.android.demo.weight.callbacks.BmiCallback;
 import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
-import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
-import com.chbase.android.simplexml.methods.getthings3.response.ThingResponseGroup2;
-import com.chbase.android.simplexml.things.thing.Thing2;
-import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveContactType;
-import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
-import com.chbase.android.simplexml.things.types.base.CodableValue;
-import com.chbase.android.simplexml.things.types.base.Contact;
-import com.chbase.android.simplexml.things.types.base.Name;
-import com.chbase.android.simplexml.things.types.dates.DateTime;
 import com.chbase.android.simplexml.things.types.types.PersonInfo;
 import com.chbase.android.simplexml.things.types.types.Record;
-import com.chbase.android.simplexml.things.types.weight.Weight;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,12 +49,11 @@ public class WeightActivity extends Activity {
     private Record selectedRecord;
     
     public class WeightCallback<Object> implements RequestCallback {
-    	public final static int UpdateWeights = 0;
-    	public final static int PutWeights = 1;
+
     	public final static int UpdateRecords = 2;
-    
+
     	private int event;
-    	
+
     	public WeightCallback(int event) {
             WeightActivity.this.setProgressBarIndeterminateVisibility(true);
     		this.event = event;
@@ -75,8 +63,8 @@ public class WeightActivity extends Activity {
         public void onError(HVException exception) {
             WeightActivity.this.setProgressBarIndeterminateVisibility(false);
             Toast.makeText(
-                WeightActivity.this, 
-                "An error occurred.  " + exception.getMessage(), 
+                WeightActivity.this,
+                "An error occurred.  " + exception.getMessage(),
                 Toast.LENGTH_LONG).show();
         }
 
@@ -84,31 +72,14 @@ public class WeightActivity extends Activity {
 		public void onSuccess(java.lang.Object obj) {
             WeightActivity.this.setProgressBarIndeterminateVisibility(false);
             switch(event) {
-            case PutWeights:
-            	getWeights();
-            	break;
-            case UpdateWeights:
-                updateWeights(((ThingResponseGroup2)obj).getThing());
-                break;
+
             case UpdateRecords:
                 updateRecords((List<Record>)obj);
                 break;
             }
         }
     }
-    
-    private void updateWeights(List<Thing2> things) {
-    	List<String> weights = new ArrayList<String>();
-        for(Thing2 thing : things) {
-        	Weight w = (Weight)thing.getData();
-        	weights.add(String.valueOf(w.getValue().getKg()));	
-        }
-        ListView lv = (ListView)findViewById(R.id.weightList);
-        lv.setAdapter(new ArrayAdapter<String>(
-            WeightActivity.this,
-            android.R.layout.simple_list_item_1,
-            weights));    
-    }
+
    
     private void updateRecords(List<Record> records) {
         Spinner s = (Spinner) findViewById(R.id.spinner);
@@ -128,6 +99,7 @@ public class WeightActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.weight);
         service = CHBaseApp.getInstance();
@@ -151,22 +123,22 @@ public class WeightActivity extends Activity {
             }
         });
 
-        Button putThing = (Button) findViewById(R.id.putThing);
-        putThing.setOnClickListener(new View.OnClickListener() {
-             public void onClick(View view) {
-                EditText text = (EditText) findViewById(R.id.weightInput);
-                putWeight(text.getText().toString());
-             }
-        });
-
-        handleAdvDirective();
 
         Spinner s = (Spinner) findViewById(R.id.spinner);
         s.setOnItemSelectedListener( new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
                 View view, int pos, long id) {
                 selectedRecord = (Record)parent.getItemAtPosition(pos);
-                getWeights();
+                List<String> emptylist = new ArrayList<String>();
+                ((ListView) findViewById(R.id.dataList)).setAdapter(
+                        new ArrayAdapter<String>(
+                                WeightActivity.this,
+                                android.R.layout.simple_list_item_1,
+                                emptylist));
+
+                AdvanceDirectiveCallback.HandleAdvanceDirective((Button)findViewById(R.id.btnPutAdvDirective), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );
+                BmiCallback.HandleBmi((Button)findViewById(R.id.btnPutBmi), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );
+
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -174,42 +146,6 @@ public class WeightActivity extends Activity {
         });
     }
 
-    private void handleAdvDirective() {
-        Button btnPutAdvDirective = (Button) findViewById(R.id.btnPutAdvDirective);
-        btnPutAdvDirective.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                putAdvDirectiveEntry();
-            }
-        });
-    }
-
-    private void putAdvDirectiveEntry() {
-        final Thing2 thing = new Thing2();
-        AdvanceDirectiveV2 directive = new AdvanceDirectiveV2();
-        directive.setWhen(DateTime.fromCalendar(Calendar.getInstance()));
-        directive.setName("Test Advance Directive");
-
-        Name name = new Name();
-        name.setFull("John Doe");
-
-        AdvanceDirectiveContactType contactInfo = new AdvanceDirectiveContactType();
-        contactInfo.setName(name);
-        contactInfo.setId("12345");
-        contactInfo.setContactInfo(new Contact());
-
-        contactInfo.setRelationship(new CodableValue("Family"));
-        contactInfo.setIsPrimary(true);
-
-        directive.getContact().add(contactInfo);
-        thing.setData(directive);
-
-        hvClient.asyncRequest(
-                selectedRecord.putThingAsync(thing),
-                new AdvanceDirectiveCallback(hvClient, selectedRecord, WeightActivity.this, AdvanceDirectiveCallback.Create));
-
-
-    }
 
 
     @Override
@@ -249,22 +185,7 @@ public class WeightActivity extends Activity {
     	}, 
     	new WeightCallback(WeightCallback.UpdateRecords));
     }
-    
-    private void putWeight(String value) {
-        final Thing2 thing = new Thing2();
-		thing.setData(new Weight(Double.parseDouble(value)));
-		hvClient.asyncRequest(
-				selectedRecord.putThingAsync(thing),
-				new WeightCallback(WeightCallback.PutWeights));
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void getWeights()
-    {
-    	hvClient.asyncRequest(
-    			selectedRecord.getThingsAsync(ThingRequestGroup2.thingTypeQuery(Weight.ThingType)),
-    			new WeightCallback(WeightCallback.UpdateWeights));
-    }        
+
 
     @Override
 	protected void onStop() {

@@ -8,6 +8,7 @@ import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirec
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
 import com.chbase.android.simplexml.things.types.appointment.Appointment;
 import com.chbase.android.simplexml.things.types.base.Person;
+import com.chbase.android.simplexml.things.types.bmi.Bmi;
 import com.chbase.android.simplexml.things.types.cholesterol.Cholesterol;
 import com.chbase.android.simplexml.things.types.condition.Condition;
 import com.chbase.android.simplexml.things.types.file.File;
@@ -68,7 +69,8 @@ public class DataXml {
 		@Element(name="cholesterol-profile", type=Cholesterol.class),
 		@Element(name="file", type=File.class),
         @Element(name="lab-test-results", type= LabResult.class),
-        @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class)
+        @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class),
+        @Element(name="bmi", type= Bmi.class)
 	})
     protected AbstractThing any;
     
