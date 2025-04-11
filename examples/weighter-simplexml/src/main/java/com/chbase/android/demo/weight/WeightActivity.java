@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import com.chbase.HVException;
 import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
 import com.chbase.android.demo.weight.callbacks.BmiCallback;
+import com.chbase.android.demo.weight.callbacks.SleepSessionCallback;
 import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
@@ -37,7 +38,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -138,7 +138,7 @@ public class WeightActivity extends Activity {
 
                 AdvanceDirectiveCallback.HandleAdvanceDirective((Button)findViewById(R.id.btnPutAdvDirective), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );
                 BmiCallback.HandleBmi((Button)findViewById(R.id.btnPutBmi), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );
-
+                SleepSessionCallback.handle((Button)findViewById(R.id.btnSleepSession), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {

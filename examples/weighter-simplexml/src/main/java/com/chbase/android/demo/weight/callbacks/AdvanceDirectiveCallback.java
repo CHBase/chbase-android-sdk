@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 
 import com.chbase.HVException;
-import com.chbase.android.demo.weight.R;
-import com.chbase.android.demo.weight.WeightActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
 import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup2;
@@ -24,7 +22,6 @@ import com.chbase.android.simplexml.things.types.base.Contact;
 import com.chbase.android.simplexml.things.types.base.Name;
 import com.chbase.android.simplexml.things.types.dates.DateTime;
 import com.chbase.android.simplexml.things.types.types.Record;
-import com.chbase.android.simplexml.things.types.weight.Weight;
 
 import java.util.ArrayList;
 import java.util.Calendar;

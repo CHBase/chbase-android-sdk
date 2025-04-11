@@ -19,6 +19,7 @@ import com.chbase.android.simplexml.things.types.medication.Medication;
 import com.chbase.android.simplexml.things.types.personal.PersonalDemographics;
 import com.chbase.android.simplexml.things.types.personalimage.PersonalImage;
 import com.chbase.android.simplexml.things.types.procedure.Procedure;
+import com.chbase.android.simplexml.things.types.sleepsessionv2.SleepSessionV2;
 import com.chbase.android.simplexml.things.types.weight.Weight;
 
 /**
@@ -55,22 +56,23 @@ import com.chbase.android.simplexml.things.types.weight.Weight;
 public class DataXml {
 
 	@ElementUnion({
-		@Element(name="allergy", type=Allergy.class),
-		@Element(name="person", type=Person.class),
-		@Element(name="personal", type=PersonalDemographics.class),
-		@Element(name="medication", type=Medication.class),
-		@Element(name="condition", type=Condition.class),
-		@Element(name="personal-image", type=PersonalImage.class),	
-		@Element(name="weight", type=Weight.class),
-		@Element(name="height", type=Height.class),		
-		@Element(name="appointment", type=Appointment.class),
-		@Element(name="procedure", type=Procedure.class),
-		@Element(name="immunization", type=Immunization.class),
-		@Element(name="cholesterol-profile", type=Cholesterol.class),
-		@Element(name="file", type=File.class),
-        @Element(name="lab-test-results", type= LabResult.class),
-        @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class),
-        @Element(name="bmi", type= Bmi.class)
+            @Element(name="allergy", type=Allergy.class),
+            @Element(name="person", type=Person.class),
+            @Element(name="personal", type=PersonalDemographics.class),
+            @Element(name="medication", type=Medication.class),
+            @Element(name="condition", type=Condition.class),
+            @Element(name="personal-image", type=PersonalImage.class),
+            @Element(name="weight", type=Weight.class),
+            @Element(name="height", type=Height.class),
+            @Element(name="appointment", type=Appointment.class),
+            @Element(name="procedure", type=Procedure.class),
+            @Element(name="immunization", type=Immunization.class),
+            @Element(name="cholesterol-profile", type=Cholesterol.class),
+            @Element(name="file", type=File.class),
+            @Element(name="lab-test-results", type= LabResult.class),
+            @Element(name="advance-directive-v2", type= AdvanceDirectiveV2.class),
+            @Element(name="bmi", type= Bmi.class),
+            @Element(name="sleep-session-v2", type= SleepSessionV2.class)
 	})
     protected AbstractThing any;
     
