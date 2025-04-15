@@ -4,6 +4,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementUnion;
 
+import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
@@ -77,6 +78,7 @@ public class DataXml {
             @Element(name="sleep-session-v2", type= SleepSessionV2.class),
             @Element(name="link", type= Link.class),
             @Element(name="status", type= Status.class),
+            @Element(name="concern", type= Concern.class),
 	})
     protected AbstractThing any;
     

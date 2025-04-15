@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import com.chbase.HVException;
 import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
 import com.chbase.android.demo.weight.callbacks.BmiCallback;
+import com.chbase.android.demo.weight.callbacks.ConcernCallback;
 import com.chbase.android.demo.weight.callbacks.SleepSessionCallback;
 import com.chbase.android.demo.weight.callbacks.StatusCallback;
 import com.chbase.android.demo.weight.callbacks.WebLinkCallback;
@@ -143,6 +144,7 @@ public class WeightActivity extends Activity {
                 SleepSessionCallback.handle((Button)findViewById(R.id.btnSleepSession), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 WebLinkCallback.handle((Button)findViewById(R.id.btnWebLink), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 StatusCallback.handle((Button)findViewById(R.id.btnStatus), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
+                ConcernCallback.handle((Button)findViewById(R.id.btnConcern), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
