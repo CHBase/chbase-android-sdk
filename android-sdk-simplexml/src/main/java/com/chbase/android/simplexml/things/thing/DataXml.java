@@ -4,6 +4,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementUnion;
 
+import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
@@ -79,6 +80,7 @@ public class DataXml {
             @Element(name="link", type= Link.class),
             @Element(name="status", type= Status.class),
             @Element(name="concern", type= Concern.class),
+            @Element(name="comment", type= Comment.class),
 	})
     protected AbstractThing any;
     
