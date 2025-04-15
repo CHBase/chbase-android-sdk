@@ -1,5 +1,6 @@
 package com.chbase.android.demo.weight.callbacks;
 
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,14 +15,13 @@ import com.chbase.android.simplexml.methods.getthings3.request.ThingRequestGroup
 import com.chbase.android.simplexml.methods.getthings3.response.ThingResponseGroup2;
 import com.chbase.android.simplexml.things.thing.Thing2;
 import com.chbase.android.simplexml.things.thing.ThingKey;
+import com.chbase.android.simplexml.things.types.base.CodableValue;
+import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.types.Record;
-import com.chbase.android.simplexml.things.types.weblink.Link;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class WebLinkCallback<Object> implements RequestCallback {
+public class StatusCallback<Object> implements RequestCallback {
 
     public  static int Create=1;
     public  static int Get=2;
@@ -29,15 +29,15 @@ public class WebLinkCallback<Object> implements RequestCallback {
     private final int mode;
     private final Record selectedRecord;
     private final ListView listView;
-    private HealthVaultClient hvClient;
+    private final HealthVaultClient hvClient;
     @Override
     public void onError(HVException exception) {
 
     }
-    public WebLinkCallback(HealthVaultClient hvClient,
-                           Record selectedRecord,
-                           Activity activity,
-                           ListView listView, int mode){
+    public StatusCallback(HealthVaultClient hvClient,
+                          Record selectedRecord,
+                          Activity activity,
+                          ListView listView, int mode){
         this.activity=activity;
         this.mode = mode;
         this.hvClient=hvClient;
@@ -51,15 +51,15 @@ public class WebLinkCallback<Object> implements RequestCallback {
             ThingKey key = (ThingKey) o;
             Toast.makeText(this.activity, "Created item with key "+key.getValue(), Toast.LENGTH_SHORT).show();
             hvClient.asyncRequest(
-                    selectedRecord.getThingsAsync(ThingRequestGroup2.thingTypeQuery(Link.typeId)),
-                    new WebLinkCallback(this.hvClient, this.selectedRecord, this.activity, this.listView, Get));
+                    selectedRecord.getThingsAsync(ThingRequestGroup2.thingTypeQuery(Status.typeId)),
+                    new StatusCallback(this.hvClient, this.selectedRecord, this.activity, this.listView, Get));
         }
         else {
             ThingResponseGroup2 responseGroup2 = (ThingResponseGroup2) o;
             List<String> listData = new ArrayList<String>();
             for(Thing2 thing : responseGroup2.getThing()) {
-                Link item = (Link)thing.getData();
-                listData.add(item.getUrl()+","+item.getTitle());
+                Status item = (Status) thing.getData();
+                listData.add(item.getText()+","+item.getStatusType().getText());
             }
 
             this.listView.setAdapter(new ArrayAdapter<String>(
@@ -72,21 +72,18 @@ public class WebLinkCallback<Object> implements RequestCallback {
 
     private static void put(ListView listView, Activity activity, Record selectedRecord, HealthVaultClient hvClient) {
         final Thing2 thing = new Thing2();
-        Link link = new Link();
-        Random random=new Random();
-        int randInt=random.nextInt(1000);
-        link.setTitle("New URL "+randInt);
+        Status status = new Status();
 
-
-        link.setUrl("https://developer.chbase.com/"+randInt);
-        thing.setData(link);
+        status.setStatusType(new CodableValue("Some code"));
+        status.setText("Some random chbase status");
+        thing.setData(status);
 
         hvClient.asyncRequest(
                 selectedRecord.putThingAsync(thing),
-                new WebLinkCallback(hvClient, selectedRecord,
+                new StatusCallback(hvClient, selectedRecord,
                         activity,
                         listView,
-                        WebLinkCallback.Create));
+                        StatusCallback.Create));
 
 
     }
