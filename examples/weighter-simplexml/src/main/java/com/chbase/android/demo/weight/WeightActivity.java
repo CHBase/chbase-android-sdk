@@ -21,6 +21,7 @@ import java.util.concurrent.Callable;
 
 import com.chbase.HVException;
 import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
+import com.chbase.android.demo.weight.callbacks.BPCallback;
 import com.chbase.android.demo.weight.callbacks.BmiCallback;
 import com.chbase.android.demo.weight.callbacks.CommentCallback;
 import com.chbase.android.demo.weight.callbacks.ConcernCallback;
@@ -149,6 +150,7 @@ public class WeightActivity extends Activity {
                 ConcernCallback.handle((Button)findViewById(R.id.btnConcern), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 CommentCallback.handle((Button)findViewById(R.id.btnComment), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 EncounterCallback.handle((Button)findViewById(R.id.btnEncounter), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
+                BPCallback.handle((Button)findViewById(R.id.btnBp), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
