@@ -9,6 +9,7 @@ import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
+import com.chbase.android.simplexml.things.types.insulininjection.InsulinInjection;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
@@ -87,6 +88,7 @@ public class DataXml {
             @Element(name="encounter", type= Encounter.class),
             @Element(name="blood-pressure", type= BloodPressure.class),
             @Element(name="body-dimension", type= BodyDimension.class),
+            @Element(name="insulin-injection", type= InsulinInjection.class),
 	})
     protected AbstractThing any;
     
