@@ -5,6 +5,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementUnion;
 
 import com.chbase.android.simplexml.things.types.bloodpressure.BloodPressure;
+import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
@@ -85,6 +86,7 @@ public class DataXml {
             @Element(name="comment", type= Comment.class),
             @Element(name="encounter", type= Encounter.class),
             @Element(name="blood-pressure", type= BloodPressure.class),
+            @Element(name="body-dimension", type= BodyDimension.class),
 	})
     protected AbstractThing any;
     

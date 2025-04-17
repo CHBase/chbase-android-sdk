@@ -33,6 +33,7 @@
 		<Button android:layout_width="wrap_content" android:id="@+id/btnComment" android:text="Add Comment" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
 		<Button android:layout_width="wrap_content" android:id="@+id/btnEncounter" android:text="Add Encounter" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
 		<Button android:layout_width="wrap_content" android:id="@+id/btnBp" android:text="Add BP" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
+		<Button android:layout_width="wrap_content" android:id="@+id/btnBd" android:text="Add Body dimension" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
 	</LinearLayout>
 
 	<ListView android:id="@+id/dataList" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="right"></ListView>

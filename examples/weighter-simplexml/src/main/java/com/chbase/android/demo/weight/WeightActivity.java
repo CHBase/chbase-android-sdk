@@ -23,6 +23,7 @@ import com.chbase.HVException;
 import com.chbase.android.demo.weight.callbacks.AdvanceDirectiveCallback;
 import com.chbase.android.demo.weight.callbacks.BPCallback;
 import com.chbase.android.demo.weight.callbacks.BmiCallback;
+import com.chbase.android.demo.weight.callbacks.BodyDimensionCallback;
 import com.chbase.android.demo.weight.callbacks.CommentCallback;
 import com.chbase.android.demo.weight.callbacks.ConcernCallback;
 import com.chbase.android.demo.weight.callbacks.EncounterCallback;
@@ -33,6 +34,7 @@ import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
 import com.chbase.android.simplexml.client.RequestCallback;
+import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.types.PersonInfo;
 import com.chbase.android.simplexml.things.types.types.Record;
 import android.app.Activity;
@@ -150,7 +152,8 @@ public class WeightActivity extends Activity {
                 ConcernCallback.handle((Button)findViewById(R.id.btnConcern), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 CommentCallback.handle((Button)findViewById(R.id.btnComment), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
                 EncounterCallback.handle((Button)findViewById(R.id.btnEncounter), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
-                BPCallback.handle((Button)findViewById(R.id.btnBp), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
+                BPCallback.handle((Button)findViewById(R.id.btnBp), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );
+                BodyDimensionCallback.handle((Button)findViewById(R.id.btnBd), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient );;
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
