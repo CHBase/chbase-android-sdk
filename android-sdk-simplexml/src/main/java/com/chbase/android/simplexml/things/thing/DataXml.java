@@ -4,12 +4,15 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementUnion;
 
+import com.chbase.android.simplexml.things.types.bloodglucose.BloodGlucose;
+import com.chbase.android.simplexml.things.types.bloodoxygensaturation.BloodOxygenSaturation;
 import com.chbase.android.simplexml.things.types.bloodpressure.BloodPressure;
 import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
 import com.chbase.android.simplexml.things.types.insulininjection.InsulinInjection;
+import com.chbase.android.simplexml.things.types.insulininjectionusage.InsulinInjectionUsage;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
@@ -89,6 +92,10 @@ public class DataXml {
             @Element(name="blood-pressure", type= BloodPressure.class),
             @Element(name="body-dimension", type= BodyDimension.class),
             @Element(name="insulin-injection", type= InsulinInjection.class),
+            @Element(name="blood-glucose", type= BloodGlucose.class),
+            @Element(name="blood-oxygen-saturation", type= BloodOxygenSaturation.class),
+            @Element(name="diabetes-insulin-injection-use", type= InsulinInjectionUsage.class),
+
 	})
     protected AbstractThing any;
     
