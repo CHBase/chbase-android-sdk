@@ -34,7 +34,10 @@ import com.chbase.android.demo.weight.callbacks.StatusCallback;
 import com.chbase.android.demo.weight.callbacks.WebLinkCallback;
 import com.chbase.android.demo.weight.callbacks.databuilders.BloodGlucoseBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.BloodOxygenSaturationBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.HbA1CBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.HealthAssessmentBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.InsulinInjectionUsageBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.PeakflowBuilder;
 import com.chbase.android.simplexml.CHBaseApp;
 import com.chbase.android.simplexml.ShellActivity;
 import com.chbase.android.simplexml.client.HealthVaultClient;
@@ -164,7 +167,9 @@ public class WeightActivity extends Activity {
                 GenericCallback.handle((Button)findViewById(R.id.btnGlucose), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new BloodGlucoseBuilder());
                 GenericCallback.handle((Button)findViewById(R.id.btnBOS), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new BloodOxygenSaturationBuilder());
                 GenericCallback.handle((Button)findViewById(R.id.btnInsInjUse), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new InsulinInjectionUsageBuilder());
-
+                GenericCallback.handle((Button)findViewById(R.id.btnHealthAss), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new HealthAssessmentBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnHba1c), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new HbA1CBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnPeakflow), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new PeakflowBuilder());
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {

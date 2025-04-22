@@ -11,8 +11,11 @@ import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
+import com.chbase.android.simplexml.things.types.hba1c.HbA1C;
+import com.chbase.android.simplexml.things.types.healthassessment.HealthAssessment;
 import com.chbase.android.simplexml.things.types.insulininjection.InsulinInjection;
 import com.chbase.android.simplexml.things.types.insulininjectionusage.InsulinInjectionUsage;
+import com.chbase.android.simplexml.things.types.peakflow.PeakFlow;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
@@ -95,6 +98,9 @@ public class DataXml {
             @Element(name="blood-glucose", type= BloodGlucose.class),
             @Element(name="blood-oxygen-saturation", type= BloodOxygenSaturation.class),
             @Element(name="diabetes-insulin-injection-use", type= InsulinInjectionUsage.class),
+            @Element(name="health-assessment", type= HealthAssessment.class),
+            @Element(name="HbA1C", type= HbA1C.class),
+            @Element(name="peak-flow", type= PeakFlow.class),
 
 	})
     protected AbstractThing any;

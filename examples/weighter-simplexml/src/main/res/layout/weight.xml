@@ -18,28 +18,123 @@
 		            android:layout_height="wrap_content"
 		            android:text="NewApp" />
 	</LinearLayout>
+	<ScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnPutAdvDirective" android:text="Add Advance directive" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnPutBmi" android:text="Add BMI" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnSleepSession" android:text="Add Sleep session" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnWebLink" android:text="Add Weblink" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnStatus" android:text="Add Status" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnConcern" android:text="Add Concern" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnComment" android:text="Add Comment" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnEncounter" android:text="Add Encounter" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnBp" android:text="Add BP" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnBd" android:text="Add Body dimension" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnInsInj" android:text="Add Ins. Inj." android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnGlucose" android:text="Add Blood Glucose" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnBOS" android:text="Add BOS" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-		<Button android:layout_width="wrap_content" android:id="@+id/btnInsInjUse" android:text="Add Ins. Inj. Usage" android:layout_height="wrap_content" android:layout_weight=".2"></Button>
-	</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="16dp">
 
-	<ListView android:id="@+id/dataList" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="right"></ListView>
+			<Button
+				android:id="@+id/btnPutAdvDirective"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Advance directive" />
+
+			<Button
+				android:id="@+id/btnPutBmi"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add BMI" />
+
+			<Button
+				android:id="@+id/btnSleepSession"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Sleep session" />
+
+			<Button
+				android:id="@+id/btnWebLink"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Weblink" />
+
+			<Button
+				android:id="@+id/btnStatus"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Status" />
+
+			<Button
+				android:id="@+id/btnConcern"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Concern" />
+
+			<Button
+				android:id="@+id/btnComment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Comment" />
+
+			<Button
+				android:id="@+id/btnEncounter"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Encounter" />
+
+			<Button
+				android:id="@+id/btnBp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add BP" />
+
+			<Button
+				android:id="@+id/btnBd"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Body dimension" />
+
+			<Button
+				android:id="@+id/btnInsInj"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Ins. Inj." />
+
+			<Button
+				android:id="@+id/btnGlucose"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Blood Glucose" />
+
+			<Button
+				android:id="@+id/btnBOS"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add BOS" />
+
+			<Button
+				android:id="@+id/btnInsInjUse"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Ins. Inj. Usage" />
+
+			<Button
+				android:id="@+id/btnHealthAss"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Health Assessment" />
+
+			<Button
+				android:id="@+id/btnHba1c"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add HbA1C" />
+			<Button
+				android:id="@+id/btnPeakflow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add PeakFlow" />
+			<ListView
+				android:id="@+id/dataList"
+				android:layout_width="match_parent"
+				android:layout_height="300dp"
+				android:layout_gravity="right" />
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>
 
