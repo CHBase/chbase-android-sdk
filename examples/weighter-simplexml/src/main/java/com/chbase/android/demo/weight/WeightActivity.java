@@ -32,12 +32,16 @@ import com.chbase.android.demo.weight.callbacks.InsulinInjectionCallback;
 import com.chbase.android.demo.weight.callbacks.SleepSessionCallback;
 import com.chbase.android.demo.weight.callbacks.StatusCallback;
 import com.chbase.android.demo.weight.callbacks.WebLinkCallback;
+import com.chbase.android.demo.weight.callbacks.databuilders.AppSpecificBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.AsthmaInhalerBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.AsthmaInhalerUsageBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.BloodGlucoseBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.BloodOxygenSaturationBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.DailyDietaryIntakeBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.HbA1CBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.HealthAssessmentBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.InsulinInjectionUsageBuilder;
+import com.chbase.android.demo.weight.callbacks.databuilders.MedicationFillBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.PeakflowBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.PersonBuilder;
 import com.chbase.android.demo.weight.callbacks.databuilders.ReferralBuilder;
@@ -179,6 +183,10 @@ public class WeightActivity extends Activity {
                 GenericCallback.handle((Button)findViewById(R.id.btnContact), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new PersonBuilder());
                 GenericCallback.handle((Button)findViewById(R.id.btnReferral), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new ReferralBuilder());
                 GenericCallback.handle((Button)findViewById(R.id.btnddi), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new DailyDietaryIntakeBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnMedFill), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new MedicationFillBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnAsthmaInhaler), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new AsthmaInhalerBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnAsthmaInhalerUsage), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new AsthmaInhalerUsageBuilder());
+                GenericCallback.handle((Button)findViewById(R.id.btnAppSpecific), (ListView)findViewById(R.id.dataList), WeightActivity.this, selectedRecord, hvClient, new AppSpecificBuilder());
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
