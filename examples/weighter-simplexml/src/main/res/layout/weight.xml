@@ -129,6 +129,26 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="Add PeakFlow" />
+			<Button
+				android:id="@+id/btnVitals"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Vitals" />
+			<Button
+				android:id="@+id/btnContact"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Contact" />
+			<Button
+				android:id="@+id/btnReferral"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Referral" />
+			<Button
+				android:id="@+id/btnddi"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add daily diet intake" />
 			<ListView
 				android:id="@+id/dataList"
 				android:layout_width="match_parent"

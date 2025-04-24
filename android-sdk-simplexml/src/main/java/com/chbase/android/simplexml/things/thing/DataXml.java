@@ -10,12 +10,14 @@ import com.chbase.android.simplexml.things.types.bloodpressure.BloodPressure;
 import com.chbase.android.simplexml.things.types.bodydimension.BodyDimension;
 import com.chbase.android.simplexml.things.types.comment.Comment;
 import com.chbase.android.simplexml.things.types.concern.Concern;
+import com.chbase.android.simplexml.things.types.dailydietaryintake.DailyDietaryIntake;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
 import com.chbase.android.simplexml.things.types.hba1c.HbA1C;
 import com.chbase.android.simplexml.things.types.healthassessment.HealthAssessment;
 import com.chbase.android.simplexml.things.types.insulininjection.InsulinInjection;
 import com.chbase.android.simplexml.things.types.insulininjectionusage.InsulinInjectionUsage;
 import com.chbase.android.simplexml.things.types.peakflow.PeakFlow;
+import com.chbase.android.simplexml.things.types.referral.Referral;
 import com.chbase.android.simplexml.things.types.status.Status;
 import com.chbase.android.simplexml.things.types.advancedirectivev2.AdvanceDirectiveV2;
 import com.chbase.android.simplexml.things.types.allergy.Allergy;
@@ -33,6 +35,7 @@ import com.chbase.android.simplexml.things.types.personal.PersonalDemographics;
 import com.chbase.android.simplexml.things.types.personalimage.PersonalImage;
 import com.chbase.android.simplexml.things.types.procedure.Procedure;
 import com.chbase.android.simplexml.things.types.sleepsessionv2.SleepSessionV2;
+import com.chbase.android.simplexml.things.types.vitalsigns.VitalSigns;
 import com.chbase.android.simplexml.things.types.weblink.Link;
 import com.chbase.android.simplexml.things.types.weight.Weight;
 
@@ -101,6 +104,9 @@ public class DataXml {
             @Element(name="health-assessment", type= HealthAssessment.class),
             @Element(name="HbA1C", type= HbA1C.class),
             @Element(name="peak-flow", type= PeakFlow.class),
+            @Element(name="vital-signs", type= VitalSigns.class),
+            @Element(name="referral", type= Referral.class),
+            @Element(name="dietary-intake-daily", type= DailyDietaryIntake.class),
 
 	})
     protected AbstractThing any;

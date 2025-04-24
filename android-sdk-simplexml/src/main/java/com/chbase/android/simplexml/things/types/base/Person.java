@@ -1,5 +1,7 @@
 package com.chbase.android.simplexml.things.types.base;
 
+import com.chbase.android.simplexml.things.thing.AbstractThing;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Order;
 
@@ -55,7 +57,7 @@ import org.simpleframework.xml.Order;
     "type"
 })
 
-public class Person {
+public class Person extends AbstractThing {
 	
     @Element(required = true)
     protected Name name;
@@ -74,8 +76,10 @@ public class Person {
 
     @Element(required = false)
     protected CodableValue type;
+
+    public  static String typeId = "25c94a9f-9d3d-4576-96dc-6791178a8143";
     
-    public static String getThingType() {
+    public String getThingType() {
     	return "25c94a9f-9d3d-4576-96dc-6791178a8143";
     }
 
