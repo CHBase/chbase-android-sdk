@@ -6,14 +6,18 @@ import org.simpleframework.xml.Order;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;summary xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:t="urn:com.microsoft.wc.thing.types" xmlns:wct="urn:com.microsoft.wc.types"&gt;
- *                     A measurement using specific units.
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;summary xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:t="urn:com.microsoft.wc.thing.types" xmlns:wct="urn:com.microsoft.wc.types"&gt;
+
+ *                     A measurement using specific units.
+
  *                 &lt;/summary&gt;
  * </pre>
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;remarks xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:t="urn:com.microsoft.wc.thing.types" xmlns:wct="urn:com.microsoft.wc.types"&gt;
- *                     Examples include 30 cc, 500 mg, 15 liters, 30 inches, etc. 
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;remarks xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:com.microsoft.wc.dates" xmlns:t="urn:com.microsoft.wc.thing.types" xmlns:wct="urn:com.microsoft.wc.types"&gt;
+
+ *                     Examples include 30 cc, 500 mg, 15 liters, 30 inches, etc. 
+
  *                 &lt;/remarks&gt;
  * </pre>
  * 
@@ -42,6 +46,13 @@ import org.simpleframework.xml.Order;
     "units"
 })
 public class StructuredMeasurement {
+    public  StructuredMeasurement(){
+    }
+    public  StructuredMeasurement(double value, CodableValue units){
+        this.value = value;
+        this.units = units;
+    }
+
 
     @Element(required=true)
     protected double value;

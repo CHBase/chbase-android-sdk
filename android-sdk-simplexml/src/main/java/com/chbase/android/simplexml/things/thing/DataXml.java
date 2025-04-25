@@ -7,6 +7,7 @@ import com.chbase.android.simplexml.things.types.appspecific.AppSpecific;
 import com.chbase.android.simplexml.things.types.asthmainhaler.AsthmaInhaler;
 import com.chbase.android.simplexml.things.types.asthmainhalerusage.AsthmaInhalerUsage;
 import com.chbase.android.simplexml.things.types.base.Person;
+import com.chbase.android.simplexml.things.types.basicdemographic.BasicDemographic;
 import com.chbase.android.simplexml.things.types.bloodglucose.BloodGlucose;
 import com.chbase.android.simplexml.things.types.bloodoxygensaturation.BloodOxygenSaturation;
 import com.chbase.android.simplexml.things.types.bloodpressure.BloodPressure;
@@ -18,7 +19,10 @@ import com.chbase.android.simplexml.things.types.concern.Concern;
 import com.chbase.android.simplexml.things.types.condition.Condition;
 import com.chbase.android.simplexml.things.types.dailydietaryintake.DailyDietaryIntake;
 import com.chbase.android.simplexml.things.types.encounter.Encounter;
+import com.chbase.android.simplexml.things.types.exercise.Exercise;
+import com.chbase.android.simplexml.things.types.familyhistory.FamilyHistory;
 import com.chbase.android.simplexml.things.types.file.File;
+import com.chbase.android.simplexml.things.types.foodanddrink.DietaryIntake;
 import com.chbase.android.simplexml.things.types.hba1c.HbA1C;
 import com.chbase.android.simplexml.things.types.healthassessment.HealthAssessment;
 import com.chbase.android.simplexml.things.types.height.Height;
@@ -112,7 +116,10 @@ public class DataXml {
             @Element(name = "asthma-inhaler", type = AsthmaInhaler.class),
             @Element(name = "asthma-inhaler-use", type = AsthmaInhalerUsage.class),
             @Element(name = "app-specific", type = AppSpecific.class),
-
+            @Element(name = "exercise", type = Exercise.class),
+            @Element(name = "family-history", type = FamilyHistory.class),
+            @Element(name = "dietary-intake", type = DietaryIntake.class),
+            @Element(name = "basic", type = BasicDemographic.class),
     })
     protected AbstractThing any;
 

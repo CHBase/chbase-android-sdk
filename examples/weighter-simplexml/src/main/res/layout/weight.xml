@@ -169,6 +169,26 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="Add app specific" />
+			<Button
+				android:id="@+id/btnExercise"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Exercise" />
+			<Button
+				android:id="@+id/btnFamHistory"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Family history" />
+			<Button
+				android:id="@+id/btnFnD"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Add Food and drink" />
+			<Button
+				android:id="@+id/btnBasic"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Upsert Basic" />
 			<ListView
 				android:id="@+id/dataList"
 				android:layout_width="match_parent"
